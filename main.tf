@@ -5,7 +5,7 @@ resource "azurerm_local_network_gateway" "local_gateway" {
     location                = var.resource_group_output[each.value.resource_group_name].location
     gateway_address         = length(each.value.gateway_fqdn) > 0 && each.value.gateway_fqdn != null ? null : each.value.gateway_address
     gateway_fqdn            = length(each.value.gateway_address) > 0 &&  each.value.gateway_address != null ? null : each.value.gateway_fqdn
-    address_space           = each.value.enable_bgp != true ? each.value.gateway_address: null
+    address_space           = each.value.enable_bgp != "true" ? each.value.gateway_address : null
     tags                    = each.value.tags
 
     dynamic "bgp_settings" {
