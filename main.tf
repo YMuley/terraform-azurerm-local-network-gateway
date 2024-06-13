@@ -3,8 +3,8 @@ resource "azurerm_local_network_gateway" "local_gateway" {
     name                    = each.value.name
     resource_group_name     = var.resource_group_output[each.value.resource_group_name].name
     location                = var.resource_group_output[each.value.resource_group_name].location
-    gateway_address         = length(each.value.gateway_fqdn) > 0 && each.value.gateway_fqdn != null ? null : each.value.gateway_address
-    gateway_fqdn            = length(each.value.gateway_address) > 0 &&  each.value.gateway_address != null ? null : each.value.gateway_fqdn
+    gateway_address         = each.value.gateway_fqdn != null ? null : each.value.gateway_address
+    gateway_fqdn            = each.value.gateway_address != null ? null : each.value.gateway_fqdn
     address_space           = each.value.enable_bgp != true ? each.value.address_space : null
     tags                    = each.value.tags
 
